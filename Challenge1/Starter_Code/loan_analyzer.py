@@ -1,6 +1,8 @@
 # coding: utf-8
-import csv
-from pathlib import Path
+import csv                # importing csv library
+# importing pathlib library - potentially redundant, but boot-suspenders style
+import pathlib
+from pathlib import Path  # importing 'Path' tool from pathlib
 
 """Part 1: Automate the Calculations.
 
@@ -12,28 +14,36 @@ First, let's start with some calculations on a list of prices for 5 loans.
     3. Using the sum of all loans and the total number of loans, calculate the average loan price.
     4. Print all calculations with descriptive messages.
 """
-loan_costs = [500, 600, 200, 1000, 450]
+loan_costs = [500, 600, 200, 1000, 450]   # ~ simple list
 
 # How many loans are in the list?
 # @TODO: Use the `len` function to calculate the total number of loans in the list.
 # Print the number of loans from the list
-# YOUR CODE HERE!
+number_of_loans = len(loan_costs)
+# use f-string to use variable to input the value, number of loans is integer and not monetary value
+print(f'The total number of loans is {number_of_loans}')
 
 # What is the total of all loans?
 # @TODO: Use the `sum` function to calculate the total of all loans in the list.
 # Print the total value of the loans
-# YOUR CODE HERE!
+sum_of_loans = sum(loan_costs)
+# use f-string to use variable to input the value, specify fixed 2 decimal places
+print(f'The sum of all loans is ${sum_of_loans: .2f}')
 
 # What is the average loan amount from the list?
 # @TODO: Using the sum of all loans and the total number of loans, calculate the average loan price.
 # Print the average loan amount
-# YOUR CODE HERE!
+average_loan_price = sum_of_loans / number_of_loans
+# use f-string to use variable to input the value, specify fixed 2 decimal places
+print(f'The average loan cost is ${average_loan_price: .2f}')
+
 
 """Part 2: Analyze Loan Data.
 
 Analyze the loan to determine the investment evaluation.
 
-Using more detailed data on one of these loans, follow these steps to calculate a Present Value, or a "fair price" for what this loan would be worth.
+Using more detailed data on one of these loans, 
+follow these steps to calculate a Present Value, or a "fair price" for what this loan would be worth.
 
 1. Use get() on the dictionary of additional information to extract the **Future Value** and **Remaining Months** on the loan.
     a. Save these values as variables called `future_value` and `remaining_months`.
@@ -53,6 +63,16 @@ Using more detailed data on one of these loans, follow these steps to calculate 
 """
 
 # Given the following loan data, you will need to calculate the present value for the loan
+# present value formula - P_V = F_V / (1 + Discount_Rate) ** time   # where time = years and Discount_Rate = 'annual_hurdle_rate' and
+# future value formula -  F_V = P_V * (1 + Discount_Rate) ** time
+
+# adjusting for 'monthly precision' ->  P_V = F_V / (1 + Discount_Rate / 12) ** remaining_months
+# adjusting for 'monthly precision' ->  F_V = P_V * (1 + Discount_Rate / 12) ** remaining_months
+# provided in instructions, discount rate = 20% = 0.20
+
+# A 'bullet' is a one-time lump-sum repayment of an outstanding loan made by the borrower
+# A bullet transaction = loan requires the principal balance to be paid in full when it matures
+
 loan = {
     "loan_price": 500,
     "remaining_months": 9,
@@ -60,9 +80,16 @@ loan = {
     "future_value": 1000,
 }
 
+# 1000 = P_V * (1 + 0.20 / 12)** remaining_months
+
+
 # @TODO: Use get() on the dictionary of additional information to extract the Future Value and Remaining Months on the loan.
 # Print each variable.
-# YOUR CODE HERE!
+future_value = loan.get('future_value')
+remaining_months = loan.get('remaining_months')
+
+print(f'the future value is {future_value: .2f}')
+print(f'the remaining months are {remaining_months}')
 
 
 # @TODO: Use the formula for Present Value to calculate a "fair value" of the loan.
@@ -70,14 +97,19 @@ loan = {
 #   You'll want to use the **monthly** version of the present value formula.
 #   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
 
-# YOUR CODE HERE!
+fair_value = future_value / (1 + 0.20 / 12) ** remaining_months
+present_value = fair_value
+
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
 #    If the present value of the loan is greater than or equal to the cost, then print a message that says the loan is worth at least the cost to buy it.
 #    Else, the present value of the loan is less than the loan cost, then print a message that says that the loan is too expensive and not worth the price.
 # YOUR CODE HERE!
-
+if present_value >= loan_costs:
+    print('the loan is worth at least the cost to buy it'),
+else:
+    print('the loan is too expensive and not worth the price')
 
 """Part 3: Perform Financial Calculations.
 
@@ -101,12 +133,13 @@ new_loan = {
 # @TODO: Define a new function that will be used to calculate present value.
 #    This function should include parameters for `future_value`, `remaining_months`, and the `annual_discount_rate`
 #    The function should return the `present_value` for the loan.
-# YOUR CODE HERE!
 
 
-# @TODO: Use the function to calculate the present value of the new loan given below.
-#    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
-# YOUR CODE HERE!
+def P_V = ('future_value', 'remaining_months', 'annual_discount_rate'):
+
+    # @TODO: Use the function to calculate the present value of the new loan given below.
+    #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
+    # YOUR CODE HERE!
 print(f"The present value of the loan is: {present_value}")
 
 
@@ -173,7 +206,8 @@ Output this list of inexpensive loans to a csv file
 """
 
 # Set the output header
-header = ["loan_price", "remaining_months", "repayment_interval", "future_value"]
+header = ["loan_price", "remaining_months",
+          "repayment_interval", "future_value"]
 
 # Set the output file path
 output_path = Path("inexpensive_loans.csv")
