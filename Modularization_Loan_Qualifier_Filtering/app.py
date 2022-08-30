@@ -1,4 +1,6 @@
 # Initial imports
+import sys
+import fire
 from ast import If
 from pathlib import Path
 import csv
@@ -39,7 +41,7 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
 
 
 # This function is the main execution point of the application. It triggers all the business logic.
-def run():
+def run(credit_score):
     # Set the file path of the CSV file with the banks and loans information
     file_path = Path("./data/daily_rate_sheet.csv")
     # Load the latest Bank data
@@ -52,7 +54,7 @@ def run():
     # As a customer,
     # I want to provide my financial information
     # so that I can apply for a loan
-    credit_score = 750
+    # credit_score = 750
     debt = 5000
     income = 20000
     loan_amount = 100000
@@ -66,5 +68,5 @@ def run():
     # Print the list of qualifying loans
     print(qualifying_loans)
 
-
-run()
+    if __name__ == "__main__":
+        fire.fire(run)
