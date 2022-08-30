@@ -414,10 +414,13 @@ output_path = Path("inexpensive_loans.csv")             # generate object path
 # and each row of `loan.values()` from the `inexpensive_loans` list.
 # YOUR CODE HERE!
 
-# opening the output path in 'writeable', newline... for 'special' per textbook/class canvas
-with open(output_path, 'w', newline='') as csvfile:
+# opening the output path in 'read" AND 'writeable' mode
+# ‘r+’	Read+Write - open a file for both reading and writing
+# newline... for 'special' per textbook/class canvas
+# delimeter=',' is specified for this exercise, but unnecessary as is default.
+with open(output_path, 'r+', newline='') as csvfile:
     # designating/making 'writer'
-    csvwriter = csv.writer(csvfile)
+    csvwriter = csv.writer(csvfile, delimiter=',')
     # using writer to write header 'row'
     csvwriter.writerow(header)
     # iterate through the list of inexpensive loans temp assign values to variable 'row'
