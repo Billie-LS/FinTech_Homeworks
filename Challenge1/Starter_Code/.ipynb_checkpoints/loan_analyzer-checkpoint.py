@@ -43,8 +43,7 @@ print(f'The average loan cost is ${average_loan_price:.2f}')
 
 # alternate syntax using import statistics, statistics.mean()
 average_loan_price = statistics.mean(loan_costs)
-# use f-string to use variable to input the value, round() with possible 2 decimal places = The average loan cost is $550
-print(f'The average loan cost is ${round(average_loan_price, 2)}')
+print(f'The average loan cost is ${round(average_loan_price, 2)}')  # use f-string to use variable to input the value, round() with possible 2 decimal places = The average loan cost is $550
 
 """Part 2: Analyze Loan Data.
 
@@ -135,8 +134,7 @@ print(f'the fair value is ${present_value:.2f}')
 def present_value_fxn(future_value, annual_discount_rate, remaining_months):
     # variable, present_value has global scope previously defined as the 'monthly precision' present value formula
     present_value_calc = present_value
-    print(
-        f'directly from the function - the fair value is ${present_value_calc:.2f}')
+    print(f'directly from the function - the fair value is ${present_value_calc:.2f}')
     return present_value_calc
 
 
@@ -149,8 +147,7 @@ def present_value_fxn_a(loan, annual_discount_rate):
     future_value = loan.get('future_value')
     remaining_months = loan.get('remaining_months')
     present_value_calc = present_value
-    print(
-        f'directly from the function - the fair value is ${present_value_calc:.2f}')
+    print(f'directly from the function - the fair value is ${present_value_calc:.2f}')
     return present_value_calc
 
 
@@ -170,8 +167,7 @@ def present_value_fxn_b(loan):
     hurdle_rate = loan.get('hurdle_rate')
     remaining_months = loan.get('remaining_months')
     present_value_calc = present_value
-    print(
-        f'directly from the function - the fair value is ${present_value_calc:.2f}')
+    print(f'directly from the function - the fair value is ${present_value_calc:.2f}')
     return present_value_calc
 
 
@@ -189,8 +185,7 @@ def present_value_fxn_c(loan):
     # moving the 'monthly precision' present value formula into the body of the function
     present_value_calc = future_value / \
         (1 + hurdle_rate / 12) ** remaining_months
-    print(
-        f'directly from the function - the fair value is ${present_value_calc:.2f}')
+    print(f'directly from the function - the fair value is ${present_value_calc:.2f}')
     return present_value_calc
 
 
