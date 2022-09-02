@@ -154,7 +154,7 @@ def present_value_fxn_a(loan, annual_discount_rate):
     return present_value_calc
 
 
-#  define a ONE function, present_value_fxn_d() that-
+#  define a ONE parameter function, present_value_fxn_b() that-
 #           accepts the variable assigned to the loan dictionary, loan
 #           utilizes get() in order to obtain the values for keys future_value, hurdle_rate, and remaining_months
 #           calculates the present value of the loan in the dictionary using the previously declared variable, present_value with value equals the present value formula
@@ -194,7 +194,7 @@ def present_value_fxn_c(loan):
     return present_value_calc
 
 
-# use the alternate aproaches, i.e. use/'call' the functions
+# use the alternate approaches, i.e. use/'call' the functions
 # THREE parameter function call
 # value returned out of the function is assigned to variable present_value
 present_value = present_value_fxn(
