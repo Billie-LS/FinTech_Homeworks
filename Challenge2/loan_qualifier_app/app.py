@@ -6,12 +6,14 @@ This is a command line application to match applicants with qualifying loans.
 Example:
     $ python app.py
 """
+
 import sys
-import fire
+from fire import Fire
+# import fire
 import questionary
 from pathlib import Path
 
-from qualifier.utils.fileio import load_csv
+from qualifier.utils.fileio import (load_csv, save_csv)
 
 from qualifier.utils.calculators import (
     calculate_monthly_debt_ratio,
@@ -31,7 +33,8 @@ def load_bank_data():
         The bank data from the data rate sheet CSV file.
     """
 
-    csvpath = questionary.text("Enter a file path to a rate-sheet (.csv):").ask()
+    csvpath = questionary.text(
+        "Enter a file path to a rate-sheet (.csv):").ask()
     csvpath = Path(csvpath)
     if not csvpath.exists():
         sys.exit(f"Oops! Can't find this path: {csvpath}")
@@ -47,7 +50,8 @@ def get_applicant_info():
     """
 
     credit_score = questionary.text("What's your credit score?").ask()
-    debt = questionary.text("What's your current amount of monthly debt?").ask()
+    debt = questionary.text(
+        "What's your current amount of monthly debt?").ask()
     income = questionary.text("What's your total monthly income?").ask()
     loan_amount = questionary.text("What's your desired loan amount?").ask()
     home_value = questionary.text("What's your home value?").ask()
@@ -61,7 +65,8 @@ def get_applicant_info():
     return credit_score, debt, income, loan_amount, home_value
 
 
-def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_value):
+# changed loan to loan_amount
+def find_qualifying_loans(bank_data, credit_score, debt, income, loan_amount, home_value):
     """Determine which loans the user qualifies for.
 
     Loan qualification criteria is based on:
@@ -75,7 +80,8 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
         credit_score (int): The applicant's current credit score.
         debt (float): The applicant's total monthly debt payments.
         income (float): The applicant's total monthly income.
-        loan (float): The total loan amount applied for.
+        # changed loan to loan_amount
+        loan_amount (float): The total loan amount applied for.
         home_value (float): The estimated home value.
 
     Returns:
@@ -88,28 +94,44 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
     print(f"The monthly debt to income ratio is {monthly_debt_ratio:.02f}")
 
     # Calculate loan to value ratio
-    loan_to_value_ratio = calculate_loan_to_value_ratio(loan, home_value)
+    # changed loan to loan_amount
+    loan_to_value_ratio = calculate_loan_to_value_ratio(
+        loan_amount, home_value)
     print(f"The loan to value ratio is {loan_to_value_ratio:.02f}.")
 
     # Run qualification filters
-    bank_data_filtered = filter_max_loan_size(loan, bank_data)
+    # changed loan to loan_amount
+    bank_data_filtered = filter_max_loan_size(loan_amount, bank_data)
     bank_data_filtered = filter_credit_score(credit_score, bank_data_filtered)
-    bank_data_filtered = filter_debt_to_income(monthly_debt_ratio, bank_data_filtered)
-    bank_data_filtered = filter_loan_to_value(loan_to_value_ratio, bank_data_filtered)
+    bank_data_filtered = filter_debt_to_income(
+        monthly_debt_ratio, bank_data_filtered)
+    bank_data_filtered = filter_loan_to_value(
+        loan_to_value_ratio, bank_data_filtered)
 
-    print(f"Found {len(bank_data_filtered)} qualifying loans")
+    print(
+        f'Found {len(bank_data_filtered)} qualifying loans {bank_data_filtered}')
 
     return bank_data_filtered
 
 
 def save_qualifying_loans(qualifying_loans):
     """Saves the qualifying loans to a CSV file.
-
     Args:
         qualifying_loans (list of lists): The qualifying bank loans.
-    """
+        """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
+    if not qualifying_loans:
+        sys.exit('sorry, you do not qualify for a loan')
+    saveFile = questionary.confirm(
+        'do you want to save your qualifying bank loans?').ask()
+    if saveFile == True:
+        csvpath = questionary.text(
+            'please provide a file_path to save your qualifying bank loan list:(qualifying_loans.csv)').ask()
+        save_csv(Path(csvpath), qualifying_loans)
+        sys.exit('the list of qualifying loans has has now been saved.')
+    else:
+        sys.exit('the list of qualifying loans has not been saved.')
 
 
 def run():
@@ -131,4 +153,64 @@ def run():
 
 
 if __name__ == "__main__":
-    fire.Fire(run)
+    Fire(run)
+    # fire.Fire(run)
+
+# run via - python app.py
+# at prompt for CSV file path, enter -
+#            ./data/daily_rate_sheet.csv
+# at prompt to provide file_path to save qualifying bank loan list, enter -
+#            ./data/bank_loan_list.csv
+
+
+"""thoughts, ideas, suggestions
+
+output_path = Path('qualifying_loans.csv')
+    header = ['Lender', 'Max Loan Amount', 'Max LTV',
+              'Max DTI', 'Min Credit Score', 'Interest Rate']
+    if len(qualifying_loans) > 0:
+        save_value = questionary.confirm(
+            'do you want to save your qualifying bank loans? enter 1 for yes or 0 for no').ask()
+        if save_value == True:
+            with open(output_path, 'r+', newline='') as csvfile:
+                csvwriter = csv.writer(csvfile, delimiter=',')
+                csvwriter.writerow(header)
+                for loan in qualifying_loans:
+                    csvwriter.writerow(loan)
+            print("Your qualifying loans have now been saved.")
+        else:
+            print("Your qualifying loans were not saved.")
+
+  # save_location = questionary.text("Enter a file path/name to save the qualifying loans (.csv):").ask()
+
+
+# A
+start code for csv file
+qualifying_loans = []
+qualifying_loans = find_qualifying_loans(
+    bank_data, credit_score, debt, income, loan_amount, home_value)
+header = ['Lender', 'Max Loan Amount', 'Max LTV',
+          'Max DTI', 'Min Credit Score', 'Interest Rate']
+output_path = Path('qualifying_loans.csv')
+
+
+    with open(output_path, 'r+', newline='') as csvfile:
+        csvwriter = csv.writer(csvfile, delimiter=',')
+        csvwriter.writerow(header)
+        for row in qualifying_loans:
+            csvwriter.writerow(row.values())
+
+
+# B
+if len(qualifying_loans) == 0:
+           output_path = Path(f"results/unqualified_loans/{name.lower()}")
+           save_csv(output_path, qualifying_loans)
+       else:
+           output_path = Path(f"results/qualified_loans/{name.lower()}")
+           save_csv(output_path, qualifying_loans) 
+# C
+def saveCsv(df,filepath, filename):
+    df.to_csv(os.path.join(filepath,filename))
+
+saveCsv(df,filepath='/home/ashleyubuntu/Documents',filename='df.csv')
+"""
