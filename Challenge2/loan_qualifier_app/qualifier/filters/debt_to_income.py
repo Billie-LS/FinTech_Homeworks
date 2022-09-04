@@ -7,6 +7,9 @@ maximum debt-to-income ratio.
 """
 
 
+# As a lender,
+# I want to filter the bank list by comparing if the customer's debt-to-income is equal to or less than the maximum debt-to-income ratio allowed by the bank
+# so that we can assess if the customer will have payment capacity according to the bank's criteria
 def filter_debt_to_income(monthly_debt_ratio, bank_list):
     """Filters the bank list by the maximum debt-to-income ratio allowed by the bank.
 

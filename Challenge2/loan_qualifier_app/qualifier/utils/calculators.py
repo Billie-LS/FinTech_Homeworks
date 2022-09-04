@@ -7,6 +7,9 @@ determine loan qualifications.
 """
 
 
+# As a lender,
+# I want to calculate applicant's monthly debt-to-income ratio
+# so that we can assess the ability to pay of the borrower
 def calculate_monthly_debt_ratio(monthly_debt_payment, monthly_income):
     """Calculates users monthly debt to income ratio.
 
@@ -21,6 +24,9 @@ def calculate_monthly_debt_ratio(monthly_debt_payment, monthly_income):
     return monthly_debt_ratio
 
 
+# As a lender,
+# I want to calculate the applicant's loan-to-value ratio
+# so that we can evaluate the risk of lending money to the borrower
 def calculate_loan_to_value_ratio(loan_amount, home_value):
     """Calculates users loan to value ratio based on inputs.
 

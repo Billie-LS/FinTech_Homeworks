@@ -5,17 +5,17 @@ This contains a helper function for loading and saving CSV files.
 
 """
 import csv
+from pathlib import Path
+import questionary
+# This function loads a CSV file from the filepath defined in `csvpath`
 
 
 def load_csv(csvpath):
     """Reads the CSV file from path provided.
-
     Args:
         csvpath (Path): The csv file path.
-
     Returns:
         A list of lists that contains the rows of data from the CSV file.
-
     """
     with open(csvpath, "r") as csvfile:
         data = []
@@ -30,15 +30,27 @@ def load_csv(csvpath):
     return data
 
 
+def input_bank_data():
+    """Ask for the file path to the latest banking data and load the CSV file.
+    Returns:
+        The bank data from the data rate sheet CSV file.
+    """
+
+    csvpath = questionary.text(
+        "Enter a file path to a rate-sheet (.csv):").ask()
+    csvpath = Path(csvpath)
+    if not csvpath.exists():
+        sys.exit(f"Oops! Can't find this path: {csvpath}")
+
+    return load_csv(csvpath)
+
+
 def save_csv(csvpath, data):
     """Reads the CSV file from path provided.
-
     Args:
         csvpath (Path): The csv file path.
-
     Returns:
         A list of lists that contains the rows of data from the CSV file.
-
     """
     with open(csvpath, "r+", newline='') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=",")

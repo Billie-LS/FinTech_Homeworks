@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 """Loan Qualifier Application.
-
-This is a command line application to match applicants with qualifying loans.
-
+This is a command line to pre-screen loan applicants application to match applicants with potentially qualifying loans.
 Example:
     $ python app.py
 """
+# initial imports
 
 import sys
 from fire import Fire
-# import fire
 import questionary
 from pathlib import Path
 
-from qualifier.utils.fileio import (load_csv, save_csv)
+from qualifier.utils.fileio import (load_csv, input_bank_data, save_csv)
 
 from qualifier.utils.calculators import (
     calculate_monthly_debt_ratio,
@@ -24,15 +22,30 @@ from qualifier.filters.max_loan_size import filter_max_loan_size
 from qualifier.filters.credit_score import filter_credit_score
 from qualifier.filters.debt_to_income import filter_debt_to_income
 from qualifier.filters.loan_to_value import filter_loan_to_value
+from experiment import prompt_user_inputs
+
+"""
+CSV file column indices
+0 - Lender
+1 - Max Loan Amount
+2 - Max LTV
+3 - Max DTI
+4 - Min Credit Score
+5 - Interest Rate
+"""
+
+# Through questionary user query input
+# This function loads a CSV file with the list of banks and available loans information
+# from the file defined in file path provided/input by user `./data/daily_rate_sheet.csv`
 
 
 def load_bank_data():
     """Ask for the file path to the latest banking data and load the CSV file.
-
     Returns:
         The bank data from the data rate sheet CSV file.
     """
-
+    return (input_bank_data())
+    """
     csvpath = questionary.text(
         "Enter a file path to a rate-sheet (.csv):").ask()
     csvpath = Path(csvpath)
@@ -40,32 +53,27 @@ def load_bank_data():
         sys.exit(f"Oops! Can't find this path: {csvpath}")
 
     return load_csv(csvpath)
+    """
+
+# The following lines, set the applicant's information and implements the following user story:
+# As a customer,
+# I want to provide my financial information
+# so that I can determine if I qualify to apply for a loan
 
 
 def get_applicant_info():
     """Prompt dialog to get the applicant's financial information.
-
     Returns:
         Returns the applicant's financial information.
     """
 
-    credit_score = questionary.text("What's your credit score?").ask()
-    debt = questionary.text(
-        "What's your current amount of monthly debt?").ask()
-    income = questionary.text("What's your total monthly income?").ask()
-    loan_amount = questionary.text("What's your desired loan amount?").ask()
-    home_value = questionary.text("What's your home value?").ask()
-
-    credit_score = int(credit_score)
-    debt = float(debt)
-    income = float(income)
-    loan_amount = float(loan_amount)
-    home_value = float(home_value)
-
-    return credit_score, debt, income, loan_amount, home_value
+    return (prompt_user_inputs())
 
 
 # changed loan to loan_amount
+# As a customer,
+# I want to know what are the best loans in the market according to my financial profile
+# so that I can choose the best option according to my needs
 def find_qualifying_loans(bank_data, credit_score, debt, income, loan_amount, home_value):
     """Determine which loans the user qualifies for.
 
@@ -134,6 +142,7 @@ def save_qualifying_loans(qualifying_loans):
         sys.exit('the list of qualifying loans has not been saved.')
 
 
+# This function is the main execution point of the application. It triggers all the business logic.
 def run():
     """The main function for running the script."""
 
@@ -154,7 +163,6 @@ def run():
 
 if __name__ == "__main__":
     Fire(run)
-    # fire.Fire(run)
 
 # run via - python app.py
 # at prompt for CSV file path, enter -
