@@ -27,20 +27,24 @@ Just after the title, introduce your project by describing attractively what the
 ## *Development Hardware used*
 ---
 macOS Monterey version 12.5.1
+
     MacBook Pro (16-inch, 2021)
     Chip Appple M1 Max
 
 ## Development Software
 
 Homebrew 3.5.10
+
     Homebrew/homebrew-core (git revision 0b6b6d9004e; last commit 2022-08-30)
     Homebrew/homebrew-cask (git revision 63ae652861; last commit 2022-08-30)
 
 anaconda Command line client 1.10.0
-conda 4.13.0
-Python 3.7.13
+
+    conda 4.13.0
+    Python 3.7.13
 
 pip 22.1.2 from /opt/anaconda3/envs/dev/lib/python3.7/site-packages/pip (python 3.7)
+
     fire 0.4.0
     questionary 1.10.0
 
@@ -48,34 +52,41 @@ git version 2.37.2
 
 Visual Studio Code version: 1.71.0 (Universal)
 
----
 
 ## Installation Guide
-
+---
 In this section, you should include detailed installation notes containing code blocks and screenshots.
 
----
 
 ## Usage
-
+---
 This section should include screenshots, code blocks, or animations explaining how to use your project.
 
 ---
 
 ## Contributors
+---
 *Author*
+
     Loki 'billie' Skylizard
     https://www.linkedin.com/in/l-s-6a0316244/
 
 *BootCamp lead instructor*
+
     Vinicio De Sola
+
 *BootCamp teaching assistants*
+
     Corey Recai
     Santiago Pedemonte
+
 *BootCamp classmates*
+
     Dinesh Mandal
     Will Conyea
+
 *Slack application, student support services via 'askBCS'*
+
     Laanu Adeyeye
     Tristen Ortiz
 
