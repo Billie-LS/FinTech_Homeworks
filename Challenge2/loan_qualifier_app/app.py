@@ -22,7 +22,8 @@ from qualifier.filters.max_loan_size import filter_max_loan_size
 from qualifier.filters.credit_score import filter_credit_score
 from qualifier.filters.debt_to_income import filter_debt_to_income
 from qualifier.filters.loan_to_value import filter_loan_to_value
-from experiment import prompt_user_inputs
+from qualifier.utils.app_info import prompt_user_inputs
+
 
 """
 CSV file column indices
@@ -45,15 +46,6 @@ def load_bank_data():
         The bank data from the data rate sheet CSV file.
     """
     return (input_bank_data())
-    """
-    csvpath = questionary.text(
-        "Enter a file path to a rate-sheet (.csv):").ask()
-    csvpath = Path(csvpath)
-    if not csvpath.exists():
-        sys.exit(f"Oops! Can't find this path: {csvpath}")
-
-    return load_csv(csvpath)
-    """
 
 # The following lines, set the applicant's information and implements the following user story:
 # As a customer,
@@ -71,6 +63,7 @@ def get_applicant_info():
 
 
 # changed loan to loan_amount
+# This function implements the following user story:
 # As a customer,
 # I want to know what are the best loans in the market according to my financial profile
 # so that I can choose the best option according to my needs
@@ -99,12 +92,14 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan_amount, ho
 
     # Calculate the monthly debt ratio
     monthly_debt_ratio = calculate_monthly_debt_ratio(debt, income)
+    # print out the monthly debt ratio
     print(f"The monthly debt to income ratio is {monthly_debt_ratio:.02f}")
 
     # Calculate loan to value ratio
     # changed loan to loan_amount
     loan_to_value_ratio = calculate_loan_to_value_ratio(
         loan_amount, home_value)
+    # print out the loan to value ratio
     print(f"The loan to value ratio is {loan_to_value_ratio:.02f}.")
 
     # Run qualification filters
@@ -116,6 +111,8 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan_amount, ho
     bank_data_filtered = filter_loan_to_value(
         loan_to_value_ratio, bank_data_filtered)
 
+    # print out the number of pre-qualified banks using len()and
+    # print out the list of banks and associated loans
     print(
         f'Found {len(bank_data_filtered)} qualifying loans {bank_data_filtered}')
 

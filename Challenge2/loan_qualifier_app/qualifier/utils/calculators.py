@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 """A Collection of Financial Calculators.
-
 This script contains a variety of financial calculator functions needed to
 determine loan qualifications.
-
 """
 
 
+# This function implements the following user story:
 # As a lender,
 # I want to calculate applicant's monthly debt-to-income ratio
-# so that we can assess the ability to pay of the borrower
+# so that we can assess, pre-qualify their ability to pay for the loan
 def calculate_monthly_debt_ratio(monthly_debt_payment, monthly_income):
     """Calculates users monthly debt to income ratio.
 
@@ -24,6 +23,7 @@ def calculate_monthly_debt_ratio(monthly_debt_payment, monthly_income):
     return monthly_debt_ratio
 
 
+# This function implements the following user story:
 # As a lender,
 # I want to calculate the applicant's loan-to-value ratio
 # so that we can evaluate the risk of lending money to the borrower

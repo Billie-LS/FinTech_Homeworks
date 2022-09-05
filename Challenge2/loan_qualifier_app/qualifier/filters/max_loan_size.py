@@ -5,9 +5,19 @@ This script filters the bank list by comparing the user's loan value
 against the bank's maximum loan size.
 
 """
+"""
+CSV file column indices
+0 - Lender
+1 - Max Loan Amount
+2 - Max LTV
+3 - Max DTI
+4 - Min Credit Score
+5 - Interest Rate
+"""
 
+# Define a function that implements the following user story:
 # As a lender,
-# I want to filter the bank list by checking the customer's desired loan against the bank's maximum loan size
+# I want to filter the bank list by comparing the customer's desired loan against the bank's maximum loan size
 # so that we can know which banks offer the loan amount requested by the customer
 
 

@@ -2,7 +2,8 @@
  upon which this application was initially written 
  """
 
-User stories:
+
+User stories, filters:
 
 * As a lender, I want to filter the bank list by comparing the customer's desired loan against the bank's maximum loan size so that we can know which banks offer the loan amount requested by the customer.
 
