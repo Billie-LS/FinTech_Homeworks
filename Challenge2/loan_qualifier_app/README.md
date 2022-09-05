@@ -1,6 +1,6 @@
-# Columbia University Engineering, New York FinTech BootCamp 
-# August 2022 Cohort
-## Module 2, Challenge
+# **Columbia University Engineering, New York FinTech BootCamp** 
+# **August 2022 Cohort**
+## *Module 2, Challenge*
 
 This is a command line interface (CLI) data processing application for bank loan pre-qualification screening.  This application matches loan applicants with banks and associated bank loans for which they may qualify.
 
@@ -22,9 +22,10 @@ The command line interface operator/user will input
 
 Just after the title, introduce your project by describing attractively what the project is about and what is the main problem that inspires you to create this project or what is the main contribution for the potential user of your project.
 
----
+
 ## Technologies
-## Development Hardware used
+## *Development Hardware used*
+---
 macOS Monterey version 12.5.1
     MacBook Pro (16-inch, 2021)
     Chip Appple M1 Max
@@ -62,19 +63,19 @@ This section should include screenshots, code blocks, or animations explaining h
 ---
 
 ## Contributors
-Author
+*Author*
     Loki 'billie' Skylizard
     https://www.linkedin.com/in/l-s-6a0316244/
 
-BootCamp lead instructor
+*BootCamp lead instructor*
     Vinicio De Sola
-BootCamp teaching assistants
+*BootCamp teaching assistants*
     Corey Recai
     Santiago Pedemonte
-BootCamp classmates
+*BootCamp classmates*
     Dinesh Mandal
     Will Conyea
-Slack application, student support services via 'askBCS'
+*Slack application, student support services via 'askBCS'*
     Laanu Adeyeye
     Tristen Ortiz
 
