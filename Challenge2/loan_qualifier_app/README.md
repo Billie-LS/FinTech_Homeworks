@@ -69,6 +69,7 @@ This section should include screenshots, code blocks, or animations explaining h
 *Author*
 
     Loki 'billie' Skylizard
+    [LinkedIn](https://www.linkedin.com/in/l-s-6a0316244)
     https://www.linkedin.com/in/l-s-6a0316244/
 
 *BootCamp lead instructor*
