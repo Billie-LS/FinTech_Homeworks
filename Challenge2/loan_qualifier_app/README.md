@@ -22,10 +22,17 @@ The command line interface operator/user will input
 
 Just after the title, introduce your project by describing attractively what the project is about and what is the main problem that inspires you to create this project or what is the main contribution for the potential user of your project.
 
-
-## Technologies
-## *Development Hardware used*
 ---
+## Technologies
+
+This project leverages python 3.7 with the following packages:
+
+* [fire](https://github.com/google/python-fire) - For the command line interface, help page, and entrypoint.
+
+* [questionary](https://github.com/tmbo/questionary) - For interactive user prompts and dialogs
+
+## *Development Hardware used*
+
 macOS Monterey version 12.5.1
 
     MacBook Pro (16-inch, 2021)
@@ -51,6 +58,10 @@ pip 22.1.2 from /opt/anaconda3/envs/dev/lib/python3.7/site-packages/pip (python 
 git version 2.37.2
 
 Visual Studio Code version: 1.71.0 (Universal)
+---
+
+
+
 
 
 ## Installation Guide
