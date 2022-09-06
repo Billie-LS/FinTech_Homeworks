@@ -22,7 +22,7 @@ The command line interface operator/user will input
     if qualified, file path to save list of banks and associated loan data
 
 ---
-## Dependencies Technologies
+## Dependencies
 
 This project leverages python 3.7 with the following packages:
 
@@ -64,14 +64,9 @@ pip 22.1.2 from /opt/anaconda3/envs/dev/lib/python3.7/site-packages/pip (python 
 git version 2.37.2
 
 Visual Studio Code version: 1.71.0 (Universal)
----
-
-
-
 
 ---
 ## Installation Guide
-
 
 Before running the application first install the following dependencies.
 
@@ -80,7 +75,17 @@ Before running the application first install the following dependencies.
   pip install questionary
 ```
 * if difficulties with installation, please refer to additional instructions as below:*
+  
   *[fire](https://github.com/google/python-fire#installation) - for expanded information and installation instructions
+
+---
+## Install of application (i.e. github clone)
+
+ In the terminal, navigate to directory where you want to install this application from the repository and enter the following command
+
+```python
+git clone https://github.com/dcmar18/LoanQualifierApp.git
+```
 
 ---
 
@@ -116,8 +121,6 @@ This section should include screenshots, code blocks, or animations explaining h
 
     Laanu Adeyeye
     Tristen Ortiz
-
-In this section, list all the people who contribute to this project. You might want recruiters or potential collaborators to reach you, so include your contact email and, optionally, your LinkedIn or Twitter profile.
 
 ---
 

@@ -49,27 +49,3 @@ def input_bank_data():
         sys.exit(f"Oops! Can't find this path: {csvpath}")
 
     return load_csv(csvpath)
-
-
-# This function opens a new CSV path for saving the generated list of
-# pre-qualified banks and loans via creating a csv writer to enable
-# saving the list by creating/writing the data into a new csv file
-# a header for column labels is indicated
-def save_csv(csvpath, data):
-    """Reads the CSV file from path provided.
-    Args:
-        csvpath (Path): The csv file path.
-    Returns:
-        A list of lists that contains the rows of data from the CSV file.
-    """
-    # creates new csv read and write path
-    with open(csvpath, "r+", newline='') as csvfile:
-        # create new csv writer
-        csvwriter = csv.writer(csvfile, delimiter=",")
-        header = ['Lender', 'Max Loan Amount', 'Max LTV',
-                  'Max DTI', 'Min Credit Score', 'Interest Rate']
-        if header:
-            # add header to new csv file
-            csvwriter.writerow(header)
-        # inputs data in each row of new csv file
-        csvwriter.writerows(data)

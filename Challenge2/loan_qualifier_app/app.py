@@ -5,15 +5,15 @@ Example:
     $ python app.py
 """
 # initial imports
+import sys
+import csv
+import questionary
+from fire import Fire
 
+from pathlib import Path
 from qualifier.filters.get_qualified import got_qualifying_loans
 from qualifier.utils.app_info import prompt_user_inputs
-import sys
-from fire import Fire
-import questionary
-from pathlib import Path
-
-from qualifier.utils.fileio import (load_csv, input_bank_data, save_csv)
+from qualifier.utils.fileio import (load_csv, input_bank_data)
 
 """
 CSV file column indices
@@ -79,6 +79,11 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan_amount, ho
     """
     return (got_qualifying_loans(bank_data, credit_score, debt, income, loan_amount, home_value))
 
+# Given that no qualifying loans exist, when prompting a user
+# to save a file, then the program should notify the user and exit
+# Given that no qualifying loans exist,
+# , then the program should notify the user and exit
+
 
 def save_qualifying_loans(qualifying_loans):
     """Saves the qualifying loans to a CSV file.
@@ -87,21 +92,52 @@ def save_qualifying_loans(qualifying_loans):
         """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
-    if not qualifying_loans:
-        sys.exit('sorry, you do not qualify for a loan')
+    number_of_qualifying_loans = len(qualifying_loans)
+
     saveFile = questionary.confirm(
         'do you want to save your qualifying bank loans?').ask()
+
+    if number_of_qualifying_loans < 1:
+        sys.exit(
+            f"Oops! Can't find any possible lender based on your financial information.")
+
     if saveFile == True:
         csvpath = questionary.text(
             'please provide a file_path to save your qualifying bank loan list:(qualifying_loans.csv)').ask()
         save_csv(Path(csvpath), qualifying_loans)
-        sys.exit(
-            f'the list of qualifying loans has has now been saved to: {str(csvpath)}')
+
     else:
         sys.exit('the list of qualifying loans has not been saved.')
 
 
+# This function opens a new CSV path for saving the generated list of
+# pre-qualified banks and loans via creating a csv writer to enable
+# saving the list by creating/writing the data into a new csv file
+# a header for column labels is indicated
+def save_csv(csvpath, data):
+    """Open a new CSV path for saving the CSV file to path provided.
+    Args:
+        csvpath (Path): The csv file path.
+    Returns:
+        A list of lists that contains the rows of data from the CSV file.
+    """
+    # creates new csv read and write path
+    with open(csvpath, "r+", newline='') as csvfile:
+        # create new csv writer
+        csvwriter = csv.writer(csvfile, delimiter=",")
+        header = ['Lender', 'Max Loan Amount', 'Max LTV',
+                  'Max DTI', 'Min Credit Score', 'Interest Rate']
+        if header:
+            # add header to new csv file
+            csvwriter.writerow(header)
+        # inputs data in each row of new csv file
+        csvwriter.writerows(data)
+        print(
+            f'the list of qualifying loans has has now been saved to: {str(csvpath)}')
+
 # This function is the main execution point of the application. It triggers all the business logic.
+
+
 def run():
     """The main function for running the script."""
 
