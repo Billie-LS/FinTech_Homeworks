@@ -72,4 +72,4 @@ def save_csv(csvpath, data):
             # add header to new csv file
             csvwriter.writerow(header)
         # inputs data in each row of new csv file
-        csvwriter.writerow(data)
+        csvwriter.writerows(data)

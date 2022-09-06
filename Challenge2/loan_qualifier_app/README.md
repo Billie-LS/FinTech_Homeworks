@@ -8,8 +8,9 @@ The screening application is processed via applicant query for applicant specifi
 
 Through processing the loan applicant provided data and comparing it to the loan criteria of various lenders, the loan applicant's eligibility for the loan they are seeking is determined.  The program will output for the applicant their calculated monthly debt to income (DTI) ratio, loan to value (LTV) ratio, and, if they qualify, the number of banks with a list of those banks to which they are pre-qualified will be outputted.  The program will then offer to save the list of banks and loan data.  Upon selcting to save the data, the list of banks and loan data within a comma separated values (CSV) file, `bank_loan_list`.
 
-## Methods
 ---
+## Methods
+
 The command line interface operator/user will input
     file path for the `daily_rate_sheet`
     applicant's
@@ -20,18 +21,23 @@ The command line interface operator/user will input
         current home value
     if qualified, file path to save list of banks and associated loan data
 
-Just after the title, introduce your project by describing attractively what the project is about and what is the main problem that inspires you to create this project or what is the main contribution for the potential user of your project.
-
 ---
-## Technologies
+## Dependencies Technologies
 
 This project leverages python 3.7 with the following packages:
+
+* [sys](https://docs.python.org/3/library/sys.html?highlight=sys#module-sys) - System-specific parameters and functions
+
+* [pathlib](https://docs.python.org/3/library/pathlib.html) - Object-oriented filesystem paths
+  
+* [csv](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv) - File Reading and Writing
 
 * [fire](https://github.com/google/python-fire) - For the command line interface, help page, and entrypoint.
 
 * [questionary](https://github.com/tmbo/questionary) - For interactive user prompts and dialogs
 
-## *Development Hardware used*
+
+## *Hardware used for development*
 
 macOS Monterey version 12.5.1
 
@@ -63,11 +69,20 @@ Visual Studio Code version: 1.71.0 (Universal)
 
 
 
-
-## Installation Guide
 ---
-In this section, you should include detailed installation notes containing code blocks and screenshots.
+## Installation Guide
 
+
+Before running the application first install the following dependencies.
+
+```python
+  pip install fire
+  pip install questionary
+```
+* if difficulties with installation, please refer to additional instructions as below:*
+  *[fire](https://github.com/google/python-fire#installation) - for expanded information and installation instructions
+
+---
 
 ## Usage
 ---
