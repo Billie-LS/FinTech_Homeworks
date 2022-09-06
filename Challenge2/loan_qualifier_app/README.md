@@ -84,8 +84,9 @@ Before running the application first install the following dependencies.
  In the terminal, navigate to directory where you want to install this application from the repository and enter the following command
 
 ```python
-git clone https://github.com/dcmar18/LoanQualifierApp.git
+git clone git@github.com:Billie-LS/loan_prequal_qualifier_app.git
 ```
+
 
 ---
 
