@@ -1,12 +1,16 @@
 # **Columbia University Engineering, New York FinTech BootCamp** 
 # **August 2022 Cohort**
-## *Module 2, Challenge*
+## *Module 3, Challenge*
 
-This is a command line interface (CLI) data processing application for bank loan pre-qualification screening.  This application matches loan applicants with banks and associated bank loans for which they may qualify.
+This is a financial analysis application. This analysis utilizes a web-based interactive development environment (IDE) interface to run a data processing application which retrospectively examines the arbitrage trade opportunities for Bitcoin using bitstamp and coinbase exchanges over a three month period in 2018.
 
-The screening application is processed via applicant query for applicant specific data.  The user will input applicant's credit score, current debt level, income, the size of the loan desired, and the value of the applicant's collateral (i.e. current home value).  These data points are compared against the loan criteria of various lenders contained within a comma separated values (CSV) file, `daily_rate_sheet`.  
+This application script is run through Jupyter Lab web-based interactive development environment to perform the analysis.  The analysis employs a three phase financial analysis approach (data collection, preparation, and analysis) to identify potentially profitable arbitrage opportunities that may have existed between bitstamp and coinbase exchanges over a three month period in 2018.  For the purpose of this analysis, a profitable arbitrage trade was defined as one in which the return was equal to or greater than 1%.  This would thus take into account 1/2% cost to buy in conjunction with 1/2% cost to sell.  
 
-Through processing the loan applicant provided data and comparing it to the loan criteria of various lenders, the loan applicant's eligibility for the loan they are seeking is determined.  The program will output for the applicant their calculated monthly debt to income (DTI) ratio, loan to value (LTV) ratio, and, if they qualify, the number of banks with a list of those banks to which they are pre-qualified will be outputted.  The program will then offer to save the list of banks and loan data.  Upon selcting to save the data, the list of banks and loan data within a comma separated values (CSV) file, `bank_loan_list`.
+The Bitcoin trading data for the time period analyzed was collected and processed from `bitstamp.csv` and `coinbase.csv` data files.  From this data, three one day periods were identified for potential arbitrage trade opportunity comparisons, 'early', 'middle', and 'late'.  These three days utilized for this analysis do not represent the only opportunities available.  Rather, they represent the greatest opportunities for the time period of the data from which each was chosen.
+
+Beyond the scope of the assignment, the author sought to conduct additional processing of the data obtained through processing and provide further visualization with combined data plots of the three one-day time periods examined.  The image included below is a rough example that is more thoroughly explained within the body of the analysis.
+
+![combined overlay of arbitrage plots]images/cumulative_prof_overlay.png
 
 ---
 ## **Methods**
@@ -36,17 +40,19 @@ The command line interface operator/user will input
 ---
 ### **Dependencies**
 
-This project leverages python 3.7 with the following packages:
+This project leverages Jupyter Lab v3.4.4 and python v3.7 with the following packages:
 
-* [sys](https://docs.python.org/3/library/sys.html?highlight=sys#module-sys) - System-specific parameters and functions
+* [Path](https://docs.python.org/3/library/pathlib.html?highlight=path#module-pathlib) - From 'pathlib', Object-oriented filesystem paths, used to identify a file
 
-* [pathlib](https://docs.python.org/3/library/pathlib.html) - Object-oriented filesystem paths
-  
-* [csv](https://docs.python.org/3/library/csv.html?highlight=csv#module-csv) - File Reading and Writing
+* [pandas](https://pandas.pydata.org/docs/) - Software library written for the Python programming language for data manipulation and analysis.
 
-* [fire](https://github.com/google/python-fire) - For the command line interface, help page, and entrypoint.
+* [read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html?highlight=read_csv#) - From 'pandas', read a comma-separated values (csv) file into DataFrame
 
-* [questionary](https://github.com/tmbo/questionary) - For interactive user prompts and dialogs
+For additional and / or supplemental processing and visulaization this project also makes use of the following packages:
+
+* [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html?highlight=dataframe#pandas.DataFrame) - From 'pandas', to construct a dataframe, i.e. a two-dimensional, size-mutable, potentially heterogeneous tabular data
+
+* [MinMaxScaler](https://pandas.pydata.org/docs/) - from sklearn, preprocessing package provides several common utility functions and transformer classes to change raw feature vectors into a representation that is more suitable for the downstream estimators, transforms features by scaling each feature to a given range.
 
 
 ### **Hardware used for development**
@@ -78,22 +84,6 @@ git version 2.37.2
 Visual Studio Code version: 1.71.0 (Universal)
 
 ---
-## *Pre-Installation Guide*
-
-Before running the application first install the following dependencies.
-
-```python
-  pip install fire
-  pip install questionary
-```
-![Loan Qualifier Prompts](images/install_fire.png)
-![Loan Qualifier Prompts](images/install_questionary.png)
-
-* if difficulties with installation, please refer to additional instructions as below:*
-  
-  [fire](https://github.com/google/python-fire#installation) - for expanded information and installation instructions
-
----
 ## *Installation of application (i.e. github clone)*
 
  In the terminal, navigate to directory where you want to install this application from the repository and enter the following command
@@ -108,7 +98,7 @@ git clone git@github.com:Billie-LS/FinTech_Homeworks.git
 From terminal, the installed application is run from the installed directory by typing at prompt:
 
 ```python
-  python app.py
+  jupyter lab
 ```
 ![Loan Qualifier Prompts](images/app_on.png)
 
