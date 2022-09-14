@@ -76,12 +76,8 @@ anaconda Command line client 1.10.0
 
 pip 22.1.2 from /opt/anaconda3/envs/dev/lib/python3.7/site-packages/pip (python 3.7)
 
-    fire 0.4.0
-    questionary 1.10.0
 
 git version 2.37.2
-
-Visual Studio Code version: 1.71.0 (Universal)
 
 ---
 ## *Installation of application (i.e. github clone)*
@@ -95,21 +91,18 @@ git clone git@github.com:Billie-LS/FinTech_Homeworks.git
 ---
 ## **Usage**
 
-From terminal, the installed application is run from the installed directory by typing at prompt:
+From terminal, the installed application is run from jupyter lab web-based interactive development environment (IDE) interface by typing at prompt:
 
 ```python
   jupyter lab
 ```
-![Loan Qualifier Prompts](images/app_on.png)
+
+Within jupyter lab web-based interactive development environment (IDE) interface, you will then navigate to file 'homework 3' and double click: crypto_arbitrage.ipynb
+
+
+![program launch](images/launch_program.png)
 
 the following images will display sequential steps and prompts under four example protypical applicant scenarios.
-
-###    scenario 1 - typical good candidate
-        credit score 750, 
-        monthly debt $1200, 
-        monthly income $7500, 
-        desired loan size $100000,
-        current home value $140000
 
 ![Loan Qualifier Prompts](images/perfect_app1.png)
 ![Loan Qualifier Prompts](images/perfect_app2.png)
