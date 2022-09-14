@@ -2,7 +2,9 @@
 # **August 2022 Cohort**
 ## *Module 3, Challenge - retrospective identification and analysis of Bitcoin arbitrage opportunities within a three month time period*
 
-This is a financial analysis application. This analysis utilizes a web-based interactive development environment (IDE) interface to run a data processing application which retrospectively examines the arbitrage trade opportunities for Bitcoin using bitstamp and coinbase exchanges over a three month period in 2018.
+This is a financial analysis application. This analysis utilizes a web-based interactive development environment (IDE) interface to run a data processing application which retrospectively examines the arbitrage trade opportunities for Bitcoin using bitstamp and coinbase exchanges over a three month period in 2018.  
+
+It's purpose is to demonstrate as Bitcoin trades on markets across the globe, one may capitalize on simultaneous price dislocations in those markets through the capabilities of Pandas.  With this objective in mind, historical trade data for Bitcoin on two exchanges: Bitstamp and Coinbase is explored. Three phases of financial analysis are used to determine if any arbitrage opportunities existed for Bitcoin.
 
 This application script is run through Jupyter Lab web-based interactive development environment to perform the analysis.  The analysis employs a three phase financial analysis approach (data collection, preparation, and analysis) to identify potentially profitable arbitrage opportunities that may have existed between bitstamp and coinbase exchanges over a three month period in 2018.  For the purpose of this analysis, a profitable arbitrage trade is defined as one in which the return was equal to or greater than 1%.  This would thus take into account 1/2% cost to buy in conjunction with 1/2% cost to sell.  
 
@@ -16,7 +18,7 @@ In brief, this image demonstrates the gross magnitude and duration of arbitrage 
 
 ![combined overlay of arbitrage plots](images/scaled_overlay.png)
 
-By utilizing MinMaxScaler, the specific line plts of each intraday arbitrage period have been overlayed.  This eliminates any overt sense of 'magnitude' comparisons while enabling examination of the shape or morphology of the different periods, early, middle, and late.  The early demonstrates a steady and consistent trading morphology.  The middle shows burst periods followed by pauses which lengthen and/or coincide with subsequent bursts being diminished.  Finally, the late is grossly flat throughout the day with an apparent single burst opportunity which is generally consistent and demonstrated within the more granular analysis.
+By utilizing MinMaxScaler, the specific line plots of each intraday arbitrage period have been overlayed.  This eliminates any overt sense of 'magnitude' comparisons between each day while enabling examination of the shape or morphology of the different periods, early, middle, and late.  The early demonstrates a steady and consistent trading morphology.  The middle shows burst periods followed by pauses which lengthen and/or coincide with subsequent bursts being diminished.  Finally, the late is grossly flat throughout the day with an apparent single burst opportunity which is generally consistent and demonstrated within the more granular analysis.
 
 ---
 ## **Methods**
@@ -29,17 +31,17 @@ The code script will
         Set the parse_dates and infer_datetime_format parameters
     
     
-    Individually prepare the dateframes using 
+    Individually prepare the dateframes by cleaning missing and / or erroneous data using 
         drop all `NaN` or missing values
         `str.replace` function to remove the dollar signs ($) from the values in the Close column
         Convert the data type of the Close column to a `float`
         examine the data within the dataframes for duplicated values, and drop as necessary
 
-    Analysis is then commenced through
+    High level analysis is then commenced summary statistics and visualizations through  and  via
         generating subset dataframes with `.loc` function, specifically examining the Close column
         generate summary statistics using `.describe()` allowing for derivation of gross comparisons 
         
-    Analysis is continued with visualizations going from the gross or macro timeframes down to the specific daily timeframes
+    Analysis is continued going from the macro timeframes to select areas for deeper analysis from specific daily timeframes
         this if further focused on three days within the three months, specifically from early, middle, and late in the three months
         plot function is then used to develop visualizations for the three trading day periods of interest between the two exchanges
 
